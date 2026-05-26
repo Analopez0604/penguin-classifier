@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 st.set_page_config(
-    page_title="🐧 Penguin Classifier",
+    page_title="Penguin Classifier",
     page_icon="🐧",
     layout="wide"
 )
@@ -333,17 +333,23 @@ SPECIES_DESC  = {
 }
 
 def predecir(model, bill_l, bill_d, flipper, mass, island, sex):
-    entrada = pd.DataFrame([{
-        'bill_length_mm':   bill_l,
-        'bill_depth_mm':    bill_d,
+    # Construir todas las columnas en el mismo orden que X_train
+    cols_all = list(scaler.feature_names_in_) + ['island_Dream','island_Torgersen','sex_Male']
+    cols_num = list(scaler.feature_names_in_)
+
+    row = {
+        'bill_length_mm':    bill_l,
+        'bill_depth_mm':     bill_d,
         'flipper_length_mm': flipper,
-        'body_mass_g':      mass,
-        'island_Dream':     1 if island == 'Dream'     else 0,
-        'island_Torgersen': 1 if island == 'Torgersen' else 0,
-        'sex_Male':         1 if sex == 'Male'         else 0,
-    }])
-    cols_n = ['bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g']
-    entrada[cols_n] = scaler.transform(entrada[cols_n])
+        'body_mass_g':       mass,
+        'island_Dream':      1 if island == 'Dream'     else 0,
+        'island_Torgersen':  1 if island == 'Torgersen' else 0,
+        'sex_Male':          1 if sex == 'Male'         else 0,
+    }
+    entrada = pd.DataFrame([row])
+    num_part = pd.DataFrame(scaler.transform(entrada[cols_num]), columns=cols_num)
+    for c in cols_num:
+        entrada[c] = num_part[c].values
     pred   = model.predict(entrada)[0]
     proba  = model.predict_proba(entrada)[0]
     clases = model.classes_
