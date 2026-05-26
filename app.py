@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import time
+import plotly.express as px
+import plotly.graph_objects as go
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
@@ -524,16 +526,102 @@ if predict_btn:
 
 else:
     st.markdown("""
-    <div style="text-align:center;padding:4rem 2rem;color:#1e2d4a;">
-        <div style="font-size:4rem;margin-bottom:1rem;">🐧</div>
-        <div style="font-family:'Syne',sans-serif;font-size:1.3rem;color:#2a3a5a;">
-            Ingresa los datos en el panel lateral y haz clic en Clasificar
-        </div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;margin-top:0.8rem;color:#1e2d4a;">
-            Los dos modelos predecirán simultáneamente y podrás comparar sus resultados
+    <div style="text-align:center;padding:2rem 2rem 1rem;color:#1e2d4a;">
+        <div style="font-family:'Syne',sans-serif;font-size:1.1rem;color:#2a3a5a;">
+            👈 Ajusta los valores en el panel lateral y haz clic en <b style="color:#60a5fa">Clasificar</b>
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+
+# ── SCATTER PLOT INTERACTIVO — siempre visible ────────────────────────────
+st.markdown("""
+<div style="margin-top:2.5rem;">
+    <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.3rem;
+                color:#dde3f0;margin-bottom:0.3rem;">
+        📍 Tu pingüino en el dataset real
+    </div>
+    <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:#4b5a7a;margin-bottom:1rem;">
+        El punto blanco muestra dónde cae tu pingüino respecto a los 344 registros reales.
+        Selecciona los ejes que quieras explorar.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+df_plot = sns.load_dataset('penguins').dropna()
+
+col_eje1, col_eje2 = st.columns(2)
+opciones = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
+labels   = {
+    'bill_length_mm':    'Longitud del pico (mm)',
+    'bill_depth_mm':     'Profundidad del pico (mm)',
+    'flipper_length_mm': 'Longitud de aleta (mm)',
+    'body_mass_g':       'Masa corporal (g)',
+    'species':           'Especie'
+}
+with col_eje1:
+    eje_x = st.selectbox("Eje X", opciones, index=0, key="ex")
+with col_eje2:
+    eje_y = st.selectbox("Eje Y", opciones, index=2, key="ey")
+
+COLORES = {"Adelie": "#34d399", "Chinstrap": "#f472b6", "Gentoo": "#60a5fa"}
+
+fig = px.scatter(
+    df_plot, x=eje_x, y=eje_y, color="species",
+    color_discrete_map=COLORES,
+    labels=labels,
+    hover_data=["species", "island", "sex"],
+    opacity=0.7,
+    template="plotly_dark",
+)
+
+fig.update_traces(marker=dict(size=9, line=dict(width=0)))
+
+# Punto del usuario
+val_x = {
+    'bill_length_mm':    bill_length,
+    'bill_depth_mm':     bill_depth,
+    'flipper_length_mm': flipper,
+    'body_mass_g':       body_mass,
+}[eje_x]
+
+val_y = {
+    'bill_length_mm':    bill_length,
+    'bill_depth_mm':     bill_depth,
+    'flipper_length_mm': flipper,
+    'body_mass_g':       body_mass,
+}[eje_y]
+
+fig.add_trace(go.Scatter(
+    x=[val_x], y=[val_y],
+    mode="markers+text",
+    marker=dict(size=18, color="white", symbol="star",
+                line=dict(color="#fbbf24", width=2)),
+    text=["← Tu pingüino"],
+    textposition="middle right",
+    textfont=dict(color="white", size=12, family="IBM Plex Mono"),
+    name="Tu pingüino",
+    hovertemplate=f"<b>Tu pingüino</b><br>{labels[eje_x]}: {val_x}<br>{labels[eje_y]}: {val_y}<extra></extra>"
+))
+
+fig.update_layout(
+    paper_bgcolor="#090d1a",
+    plot_bgcolor="#0d1424",
+    font=dict(color="#94a3b8", family="Inter"),
+    legend=dict(
+        bgcolor="#0f1629",
+        bordercolor="#1e2d4a",
+        borderwidth=1,
+        font=dict(size=12)
+    ),
+    xaxis=dict(gridcolor="#1e2d4a", title_font=dict(color="#64748b")),
+    yaxis=dict(gridcolor="#1e2d4a", title_font=dict(color="#64748b")),
+    height=460,
+    margin=dict(l=20, r=20, t=20, b=20),
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
 
 st.markdown("""
 <div class="footer">
