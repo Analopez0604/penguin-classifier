@@ -23,18 +23,18 @@ st.markdown("""
 
 *, html, body { box-sizing: border-box; }
 
-.stApp { background: #f8f9fc; color: #1a1d27; }
+.stApp { background: #12111a; color: #f0eeff; }
 
 section[data-testid="stSidebar"] {
-    background: #ffffff !important;
-    border-right: 1px solid #e8eaf0 !important;
+    background: #1a1826 !important;
+    border-right: 1px solid #2a2740 !important;
 }
 
 h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
 
 .hero {
     padding: 2.5rem 0 1.5rem;
-    border-bottom: 1px solid #e8eaf0;
+    border-bottom: 1px solid #2a2740;
     margin-bottom: 2rem;
 }
 .hero-title {
@@ -42,22 +42,26 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     font-size: 3rem;
     font-weight: 800;
     line-height: 1.05;
-    color: #1a1d27;
+    color: #f0eeff;
     margin: 0;
 }
-.hero-title span { color: #6366f1; }
+.hero-title span {
+    background: linear-gradient(135deg, #c084fc, #f472b6, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .hero-sub {
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
-    color: #9095a8;
+    color: #6b6888;
     margin-top: 0.6rem;
     font-weight: 400;
 }
 .badge {
     display: inline-block;
-    background: #f0f1ff;
-    border: 1px solid #e0e1ff;
-    color: #6366f1;
+    background: #1f1d2e;
+    border: 1px solid #2a2740;
+    color: #c084fc;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.65rem;
     padding: 3px 12px;
@@ -68,14 +72,14 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
 }
 
 .panel {
-    background: #ffffff;
-    border: 1px solid #e8eaf0;
+    background: #1a1826;
+    border: 1px solid #2a2740;
     border-radius: 18px;
     padding: 1.8rem;
     height: 100%;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 .panel::before {
     content: '';
@@ -84,8 +88,8 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     height: 3px;
     border-radius: 18px 18px 0 0;
 }
-.panel-tree::before { background: linear-gradient(90deg, #10b981, #059669); }
-.panel-knn::before  { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+.panel-tree::before { background: linear-gradient(90deg, #34d399, #10b981); }
+.panel-knn::before  { background: linear-gradient(90deg, #c084fc, #f472b6); }
 
 .panel-title {
     font-family: 'Syne', sans-serif;
@@ -93,13 +97,13 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     font-weight: 700;
     margin-bottom: 0.3rem;
 }
-.panel-title-tree { color: #059669; }
-.panel-title-knn  { color: #6366f1; }
+.panel-title-tree { color: #34d399; }
+.panel-title-knn  { color: #c084fc; }
 
 .panel-desc {
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
-    color: #9095a8;
+    color: #6b6888;
     margin-bottom: 1.4rem;
     line-height: 1.5;
 }
@@ -110,8 +114,8 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     text-align: center;
     margin-top: 1rem;
 }
-.result-box-tree { background: #f0fdf8; border: 1px solid #a7f3d0; }
-.result-box-knn  { background: #f5f3ff; border: 1px solid #ddd6fe; }
+.result-box-tree { background: #0d1f18; border: 1px solid #34d39944; }
+.result-box-knn  { background: #1a0f2e; border: 1px solid #c084fc44; }
 
 .species-name {
     font-family: 'Syne', sans-serif;
@@ -119,14 +123,14 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     font-weight: 800;
     margin: 0.3rem 0;
 }
-.species-tree { color: #059669; }
-.species-knn  { color: #6366f1; }
+.species-tree { color: #34d399; }
+.species-knn  { color: #c084fc; }
 
 .confidence-label {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.15em;
-    color: #9095a8;
+    color: #6b6888;
     text-transform: uppercase;
     margin-top: 0.8rem;
 }
@@ -134,7 +138,7 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     font-family: 'IBM Plex Mono', monospace;
     font-size: 1.4rem;
     font-weight: 600;
-    color: #1a1d27;
+    color: #f0eeff;
 }
 
 .metric-row {
@@ -145,42 +149,42 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     justify-content: center;
 }
 .metric-chip {
-    background: #f4f5f8;
-    border: 1px solid #e8eaf0;
+    background: #1f1d2e;
+    border: 1px solid #2a2740;
     border-radius: 8px;
     padding: 0.35rem 0.8rem;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.68rem;
-    color: #9095a8;
+    color: #6b6888;
 }
-.metric-chip b { color: #1a1d27; }
+.metric-chip b { color: #f0eeff; }
 
 .comparison-section {
-    background: #ffffff;
-    border: 1px solid #e8eaf0;
+    background: #1a1826;
+    border: 1px solid #2a2740;
     border-radius: 18px;
     padding: 2rem;
     margin-top: 2rem;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 .comparison-title {
     font-family: 'Syne', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
-    color: #1a1d27;
+    color: #f0eeff;
     margin-bottom: 1.5rem;
     padding-bottom: 0.8rem;
-    border-bottom: 1px solid #e8eaf0;
+    border-bottom: 1px solid #2a2740;
 }
 
 .meter-label {
     font-family: 'Inter', sans-serif;
     font-size: 0.8rem;
-    color: #9095a8;
+    color: #6b6888;
     margin-bottom: 0.3rem;
 }
 .meter-wrap {
-    background: #f0f1f5;
+    background: #1f1d2e;
     border-radius: 999px;
     height: 8px;
     overflow: hidden;
@@ -189,38 +193,38 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
 .meter-fill-tree {
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, #10b981, #059669);
+    background: linear-gradient(90deg, #34d399, #10b981);
 }
 .meter-fill-knn {
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, #818cf8, #6366f1);
+    background: linear-gradient(90deg, #c084fc, #f472b6);
 }
 .meter-vals {
     display: flex;
     justify-content: space-between;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.68rem;
-    color: #9095a8;
+    color: #6b6888;
     margin-bottom: 1rem;
 }
 
 .winner-banner {
-    background: #f0fdf8;
-    border: 1px solid #a7f3d0;
+    background: #0d1f18;
+    border: 1px solid #34d39933;
     border-radius: 12px;
     padding: 1rem 1.5rem;
     text-align: center;
     margin-top: 1.5rem;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.8rem;
-    color: #9095a8;
+    color: #6b6888;
 }
 .winner-name {
     font-family: 'Syne', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #059669;
+    color: #34d399;
     display: block;
     margin-top: 0.3rem;
 }
@@ -230,7 +234,7 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #9095a8;
+    color: #6b6888;
     margin-top: 1.2rem;
     margin-bottom: 0.4rem;
 }
@@ -238,14 +242,14 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif !important; }
     text-align: center;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.68rem;
-    color: #c8cad4;
+    color: #2a2740;
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #e8eaf0;
+    border-top: 1px solid #2a2740;
 }
 
 div[data-testid="stButton"] > button {
-    background: #1a1d27;
+    background: linear-gradient(135deg, #c084fc, #f472b6);
     color: #ffffff;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
@@ -259,15 +263,15 @@ div[data-testid="stButton"] > button {
     margin-top: 0.5rem;
 }
 div[data-testid="stButton"] > button:hover {
-    background: #6366f1;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(99,102,241,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(192,132,252,0.4);
+    filter: brightness(1.1);
 }
 
 div[data-baseweb="select"] > div {
-    background: #f8f9fc !important;
-    border-color: #e8eaf0 !important;
-    color: #1a1d27 !important;
+    background: #1f1d2e !important;
+    border-color: #2a2740 !important;
+    color: #f0eeff !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -376,10 +380,10 @@ with st.sidebar:
     st.markdown('<div class="sidebar-label">Métricas del modelo (test)</div>', unsafe_allow_html=True)
     st.markdown(f"""
     <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;line-height:2;">
-    <span style="color:#059669">▶ Árbol</span> F1 <b style="color:#1a1d27">{met_tree['F1-Score']}</b>
-    &nbsp;Acc <b style="color:#1a1d27">{met_tree['Accuracy']}</b><br>
-    <span style="color:#6366f1">▶ KNN&nbsp;&nbsp;</span> F1 <b style="color:#1a1d27">{met_knn['F1-Score']}</b>
-    &nbsp;Acc <b style="color:#1a1d27">{met_knn['Accuracy']}</b>
+    <span style="color:#34d399">▶ Árbol</span> F1 <b style="color:#f0eeff">{met_tree['F1-Score']}</b>
+    &nbsp;Acc <b style="color:#f0eeff">{met_tree['Accuracy']}</b><br>
+    <span style="color:#c084fc">▶ KNN&nbsp;&nbsp;</span> F1 <b style="color:#f0eeff">{met_knn['F1-Score']}</b>
+    &nbsp;Acc <b style="color:#f0eeff">{met_knn['Accuracy']}</b>
     </div>
     """, unsafe_allow_html=True)
 
@@ -561,7 +565,7 @@ with col_eje1:
 with col_eje2:
     eje_y = st.selectbox("Eje Y", opciones, index=2, key="ey")
 
-COLORES = {"Adelie": "#10b981", "Chinstrap": "#f43f5e", "Gentoo": "#6366f1"}
+COLORES = {"Adelie": "#34d399", "Chinstrap": "#f472b6", "Gentoo": "#c084fc"}
 
 fig = px.scatter(
     df_plot, x=eje_x, y=eje_y, color="species",
@@ -569,7 +573,7 @@ fig = px.scatter(
     labels=labels,
     hover_data=["species", "island", "sex"],
     opacity=0.7,
-    template="plotly_white",
+    template="plotly_dark",
 )
 
 fig.update_traces(marker=dict(size=9, line=dict(width=0)))
@@ -592,27 +596,27 @@ val_y = {
 fig.add_trace(go.Scatter(
     x=[val_x], y=[val_y],
     mode="markers+text",
-    marker=dict(size=18, color="#1a1d27", symbol="star",
-                line=dict(color="#6366f1", width=2)),
+    marker=dict(size=18, color="#fbbf24", symbol="star",
+                line=dict(color="#f0eeff", width=2)),
     text=["← Tu pingüino"],
     textposition="middle right",
-    textfont=dict(color="#1a1d27", size=12, family="IBM Plex Mono"),
+    textfont=dict(color="#f0eeff", size=12, family="IBM Plex Mono"),
     name="Tu pingüino",
     hovertemplate=f"<b>Tu pingüino</b><br>{labels[eje_x]}: {val_x}<br>{labels[eje_y]}: {val_y}<extra></extra>"
 ))
 
 fig.update_layout(
-    paper_bgcolor="#ffffff",
-    plot_bgcolor="#f8f9fc",
-    font=dict(color="#9095a8", family="Inter"),
+    paper_bgcolor="#1a1826",
+    plot_bgcolor="#12111a",
+    font=dict(color="#6b6888", family="Inter"),
     legend=dict(
-        bgcolor="#ffffff",
-        bordercolor="#e8eaf0",
+        bgcolor="#1f1d2e",
+        bordercolor="#2a2740",
         borderwidth=1,
-        font=dict(size=12, color="#1a1d27")
+        font=dict(size=12, color="#f0eeff")
     ),
-    xaxis=dict(gridcolor="#e8eaf0", title_font=dict(color="#9095a8")),
-    yaxis=dict(gridcolor="#e8eaf0", title_font=dict(color="#9095a8")),
+    xaxis=dict(gridcolor="#2a2740", title_font=dict(color="#6b6888")),
+    yaxis=dict(gridcolor="#2a2740", title_font=dict(color="#6b6888")),
     height=460,
     margin=dict(l=20, r=20, t=20, b=20),
 )
