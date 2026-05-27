@@ -493,21 +493,28 @@ if predict_btn:
         vt = met_tree[m]
         vk = met_knn[m]
         st.markdown(f"""
-        <div style="margin-bottom:1.2rem;">
-            <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;
-                        font-size:0.75rem;color:#64748b;margin-bottom:0.4rem;">
-                <span>{m}</span>
-                <span>
-                    <span style="color:#34d399">Árbol {vt}</span>
-                    &nbsp;·&nbsp;
-                    <span style="color:#60a5fa">KNN {vk}</span>
-                </span>
+        <div style="margin-bottom:1.6rem;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;
+                        color:#f0eeff;font-weight:600;margin-bottom:0.6rem;">{m}</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;
+                             color:#34d399;min-width:42px;">🌿 Árbol</span>
+                <div style="flex:1;background:#1f1d2e;border-radius:999px;height:12px;overflow:hidden;">
+                    <div style="width:{vt*100:.1f}%;height:100%;border-radius:999px;
+                                background:linear-gradient(90deg,#34d399,#10b981);"></div>
+                </div>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;
+                             color:#34d399;min-width:36px;text-align:right;">{vt}</span>
             </div>
-            <div class="meter-wrap" style="height:10px;">
-                <div class="meter-fill-tree" style="width:{vt*100:.1f}%;opacity:0.7;position:absolute;"></div>
-            </div>
-            <div class="meter-wrap" style="height:10px;margin-top:4px;">
-                <div class="meter-fill-knn"  style="width:{vk*100:.1f}%;"></div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;
+                             color:#c084fc;min-width:42px;">◆ KNN</span>
+                <div style="flex:1;background:#1f1d2e;border-radius:999px;height:12px;overflow:hidden;">
+                    <div style="width:{vk*100:.1f}%;height:100%;border-radius:999px;
+                                background:linear-gradient(90deg,#c084fc,#f472b6);"></div>
+                </div>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;
+                             color:#c084fc;min-width:36px;text-align:right;">{vk}</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
